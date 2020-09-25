@@ -7,7 +7,7 @@ import model.Member;
 
 public class MemberController {
 	
-	MembersDatabase mb = new MembersDatabase();
+	MembersDatabase mb = new MembersDatabase(); // By following MVC this could easily be 
 
 	public void addMember(String name, String personalNumber) {
 		mb.addMember(new Member(name, personalNumber));
@@ -26,6 +26,15 @@ public class MemberController {
 		Member editedMember = new Member(newName, newPR);
 		Member memberToChange = mb.getMemberById(id);
 		mb.editMember(memberToChange, editedMember);	
+	}
+
+	public void deleteMember(int id) {
+		mb.deleteMemberById(id);
+	}
+
+	public void registerBoat(int memberId, String type, String length, String name) {
+		// Here we should create a BoatDatabase that handles 
+		
 	}
 
 }

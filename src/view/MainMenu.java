@@ -3,10 +3,18 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import view.boatView.EditBoatView;
+import view.boatView.RegisterBoatView;
+import view.boatView.RemoveBoatView;
+
 public class MainMenu {
+	RemoveBoatView rebv = new RemoveBoatView();
+	EditBoatView ebv = new EditBoatView();
+	RegisterBoatView rbv = new RegisterBoatView();
 	EditMemberView emv = new EditMemberView();
 	RegisterMemberView rmv = new RegisterMemberView();
 	ListMemberView lmv = new ListMemberView();
+	RemoveMemberView remv = new RemoveMemberView();
 	
 	public void printMainMenu() {	
 		while(true) {
@@ -17,7 +25,10 @@ public class MainMenu {
 			System.out.println("2. Remove a Member");
 			System.out.println("3. Edit a Member");
 			System.out.println("4. View Members");
-			System.out.println("5. Exit");
+			System.out.println("5. Register Boat");
+			System.out.println("6. Edit Boat");
+			System.out.println("7. Remove Boat");
+			System.out.println("8. Exit");
 			System.out.println("Choose a option: ");
 			
 			try {
@@ -29,17 +40,23 @@ public class MainMenu {
 			if(c == 1) {
 				rmv.printRegisterMemberView();
 			} else if (c == 2) {
-				System.out.println("Moving user to removing page");
+				remv.printRemoveMemberView();
 			} else if (c == 3) {
 				emv.printEditMemberView();
 			} else if (c == 4) {
 				lmv.printOptions();
 			} else if (c == 5) {
+				rbv.printRegisterBoatView();
+			} else if (c == 6) {
+				ebv.printEditBoatView();
+			} else if (c == 7) {
+				rebv.printRemoveBoatView();
+			} else if (c == 8) {
 				System.out.println("Exiting... Good Bye!");
 				scan.close();
 				System.exit(0);
 			} else if (c != 0) {
-				System.err.println("Invalid choice... try again");
+				System.err.println("ERROR: Invalid choice... try again");
 			}
 			
 			// scan.close();

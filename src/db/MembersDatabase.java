@@ -114,8 +114,14 @@ public class MembersDatabase {
 	 * @param member
 	 */
 	public void deleteMemberById(int id) {
-		if(getMemberById(id) != null) db.remove(getMemberById(id));
-		this.saveDatabase();
+		
+		if(getMemberById(id) != null) {
+			db.remove(getMemberById(id));
+			this.saveDatabase();
+		} else {
+			System.err.println("ERROR: Couldn't find a member with that ID");
+		}
+		
 	}
 	
 	/**

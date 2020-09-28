@@ -42,7 +42,6 @@ public class MembersDatabase {
 	 * @param m A Member to be added.
 	 */
 	public boolean addMember(Member member) {
-		
 		// TODO Maybe refactor this part into a separate function.
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
@@ -65,17 +64,13 @@ public class MembersDatabase {
 	 * @param id
 	 */
 	public Member getMemberById(int id) {
-		
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
 			if (m.getId() == id) {
 				return m;
 			}
 		}
-		
 		return null;
-		
-		
 	}
 	
 	/**
@@ -85,10 +80,9 @@ public class MembersDatabase {
 	 */
 	public void editMember(Member oldMember, Member changedMember) {
 		try {
-			oldMember = getMemberById(oldMember.getId()); // TODO This line might unneccessary.
+			oldMember = getMemberById(oldMember.getId()); // TODO This line might unnecessary.
 			
 			oldMember.setName(changedMember.getName());
-			// oldMember.setOwnedBoats(changedMember.getOwnedBoats()); TODO maybe move this part to a separate boat database.
 			boolean isRegistered = false;
 			for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 				Member m = it.next();
@@ -125,11 +119,58 @@ public class MembersDatabase {
 	}
 	
 	/**
+	 * Adds a boat to a specific member.
+	 * @param id
+	 * @param type
+	 * @param length
+	 * @param name
+	 */
+	public void addBoatToMember(int id, String type, String length, String name) {
+		if(this.getMemberById(id) != null) {
+			this.getMemberById(id).addBoat(type, length, name);
+			this.saveDatabase();
+		} else {
+			System.err.println("ERROR: No member with that id...");
+		}
+	}
+	
+	/**
+	 * Edits a boat of a specific member.
+	 * @param memberId
+	 * @param boatNr
+	 * @param type
+	 * @param length
+	 * @param name
+	 */
+	public void editBoatOfMember(int memberId, int boatNr, String type, String length, String name) {
+		if(this.getMemberById(memberId) != null) {
+			this.getMemberById(memberId).editBoat(boatNr, type, length, name);
+			this.saveDatabase();
+		} else {
+			System.err.println("ERROR: No member with that id...");
+		}
+	}
+	
+	/**
+	 * Removes a boat from a specific member.
+	 * @param boatNr 
+	 * @param memberId 
+	 */
+	public void removeBoatOfMember(int memberId, int boatNr) {
+		Member m = this.getMemberById(memberId);
+		if(m != null) {
+			m.removeBoat(m.getOwnedBoats().get(boatNr));
+		} else {
+			System.err.println("ERROR: No member with that id...");
+		}
+		this.saveDatabase();
+	}
+	
+	/**
 	 * Saves the Database to a XML File. Returns true if successful or false if not.
 	 * @return boolean
 	 */
 	public boolean saveDatabase() {
-		// Save the HashSet to a xml file.
 		try {
 			xmlp.writeToXMLFile(db, totalMembers);
 			return true;
@@ -157,7 +198,7 @@ public class MembersDatabase {
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
 			if(m.getStringOfOwnedBoats() != null) {
-				String toAdd = m.toString() + m.getStringOfOwnedBoats();
+				String toAdd = m.toString() + " Owned boats: "+ m.getStringOfOwnedBoats();
 				returnArr.add(toAdd);
 			} else {
 				String toAdd = m.toString() + ", 0 Boats Owned.";

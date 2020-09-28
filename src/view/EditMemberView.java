@@ -27,7 +27,6 @@ public class EditMemberView {
 				try {
 					Long.parseLong(newPR);
 					mc.editMember(id, newName, newPR);
-					// scan.close();
 				} catch(NumberFormatException ex) {
 					System.err.println("ERROR: Enter a 10 digit personalnumber in the [YYMMDDXXXX] format.");
 					printEditMemberView();
@@ -46,6 +45,7 @@ public class EditMemberView {
 	}
 	
 	private void printCompactList(ArrayList<String> arr) {
+		System.out.println(arr.size());
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i));
 		}

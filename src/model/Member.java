@@ -31,8 +31,8 @@ public class Member {
 	 * Adds a boat to the ownedBoats array.
 	 * @param boat
 	 */
-	public void addBoat(Boat boat) {
-		this.ownedBoats.add(boat);
+	public void addBoat(String type, String length, String name) {
+		this.ownedBoats.add(new Boat(type, length, name));
 	}
 	
 	/**
@@ -45,10 +45,24 @@ public class Member {
 	}
 	
 	/**
+	 * Edits a boat.
+	 * @param boatNr the index number of the boat we want to edit.
+	 * @param type new type of boat.
+	 * @param length new length of boat.
+	 * @param name new name of boat.
+	 */
+	public void editBoat(int boatNr, String type, String length, String name) {
+		Boat boatToEdit = this.ownedBoats.get(boatNr);
+
+		boatToEdit.setType(type);
+		boatToEdit.setLength(length);
+		boatToEdit.setName(name);
+	}
+	
+	/**
 	 * toString function.
 	 * @return String
 	 */
-	//TODO THIS SHOULD BE MOVED TO VIEW CONTROLLER
 	public ArrayList<String> getStringOfOwnedBoats() {
 		
 		ArrayList<String> res = new ArrayList<String>();
@@ -63,6 +77,10 @@ public class Member {
 		return null;
 	}
 	
+	/**
+	 * toString() method, return a String representation of the Member object.
+	 * @return String
+	 */
 	public String toString() {
 		return "ID: " + getId() + ", Name: " + getName() + ", PRNR: " + getPersonalNumber();
 	}
@@ -95,5 +113,7 @@ public class Member {
 	public void setOwnedBoats(ArrayList<Boat> ownedBoats) {
 		this.ownedBoats = ownedBoats;
 	}
+
+	
 
 }

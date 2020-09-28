@@ -20,13 +20,12 @@ public class RegisterBoatView {
 			scan.nextLine();
 			System.out.println("Enter type of boat: ");
 			String type = scan.nextLine();
-			scan.nextLine();
 			System.out.println("Enter length of boat(meters): ");
 			String length = scan.nextLine();
-			scan.nextLine();
 			System.out.println("Enter name of boat: ");
 			String name = scan.nextLine();
-			mc.registerBoat(memberId, type, length, name);
+			mc.registerBoatToMember(memberId, type, length, name);
+			scan.close();
 		} catch(InputMismatchException e) {
 			System.err.println("ERROR: Invalid choice... try again");
 			printRegisterBoatView();
@@ -37,6 +36,7 @@ public class RegisterBoatView {
 	}
 	
 	private void printCompactList(ArrayList<String> arr) {
+		System.out.println(arr.size());
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i));
 		}

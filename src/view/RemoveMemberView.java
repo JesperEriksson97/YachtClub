@@ -27,6 +27,7 @@ public class RemoveMemberView {
 		
 	}
 	
+	// TODO Refactor this function into a helper function, used in multiple views.
 	private void printCompactList(ArrayList<String> arr) {
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i));

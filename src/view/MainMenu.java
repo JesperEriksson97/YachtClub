@@ -19,7 +19,7 @@ public class MainMenu {
 	public void printMainMenu() {	
 		while(true) {
 			int c = 0;
-			Scanner scan = new Scanner(System.in);
+			Scanner m_scan = new Scanner(System.in);
 			System.out.println("==== WELCOME TO THE YACHT CLUB ====");
 			System.out.println("1. Register a Member");
 			System.out.println("2. Remove a Member");
@@ -32,7 +32,7 @@ public class MainMenu {
 			System.out.println("Choose a option: ");
 			
 			try {
-				c = scan.nextInt();
+				c = m_scan.nextInt();
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid choice... try again");
 			}
@@ -53,7 +53,7 @@ public class MainMenu {
 				rebv.printRemoveBoatView();
 			} else if (c == 8) {
 				System.out.println("Exiting... Good Bye!");
-				scan.close();
+				m_scan.close();
 				System.exit(0);
 			} else if (c != 0) {
 				System.err.println("ERROR: Invalid choice... try again");

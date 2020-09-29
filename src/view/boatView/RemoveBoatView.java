@@ -24,23 +24,29 @@ public class RemoveBoatView {
 			this.printRemoveBoatView();
 		}
 		
-		printListOfBoatsAvailable(mc.getListOfOwnedBoats(id));
-		System.out.println("Enter the list number of the boat you want to delete: ");
-		try {
-			boatNr = scan.nextInt();
-			scan.close();
-		} catch (InputMismatchException e) {
-			System.err.println("ERROR: Invalid choice... try again");
+		if(mc.getListOfOwnedBoats(id) != null) {
+			printListOfBoatsAvailable(mc.getListOfOwnedBoats(id));
+			System.out.println("Enter the list number of the boat you want to delete: ");
+			try {
+				boatNr = scan.nextInt();
+			} catch (InputMismatchException e) {
+				System.err.println("ERROR: Invalid choice... try again");
+				this.printRemoveBoatView();
+			}
+			
+			mc.removeBoatFromMember(id, boatNr);
+		} else {
+			System.err.println("ERROR: The ID of the member entered owns no boats.");
 			this.printRemoveBoatView();
 		}
 		
-		mc.removeBoatFromMember(id, boatNr);
 	}
 	
 	private void printListOfBoatsAvailable(ArrayList<String> arr) {
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(i + ". " + arr.get(i));
 		}
+		
 	}
 	
 	private void printCompactList(ArrayList<String> arr) {

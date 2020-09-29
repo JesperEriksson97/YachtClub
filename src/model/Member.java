@@ -32,7 +32,7 @@ public class Member {
 	 * @param boat
 	 */
 	public void addBoat(String type, String length, String name) {
-		this.ownedBoats.add(new Boat(type, length, name));
+		this.ownedBoats.add(new Boat(type, name, length));
 	}
 	
 	/**

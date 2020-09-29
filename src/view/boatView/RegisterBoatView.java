@@ -25,7 +25,6 @@ public class RegisterBoatView {
 			System.out.println("Enter name of boat: ");
 			String name = scan.nextLine();
 			mc.registerBoatToMember(memberId, type, length, name);
-			scan.close();
 		} catch(InputMismatchException e) {
 			System.err.println("ERROR: Invalid choice... try again");
 			printRegisterBoatView();

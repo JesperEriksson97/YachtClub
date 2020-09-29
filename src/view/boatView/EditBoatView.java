@@ -41,7 +41,6 @@ public class EditBoatView {
 			String name = scan.nextLine();
 			
 			mc.editBoatOfMember(id, boatId, type, length, name);
-			scan.close();
 		} catch(InputMismatchException e) {
 			System.err.println("ERROR: Invalid choice... try again");
 			this.printEditBoatView();

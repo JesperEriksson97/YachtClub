@@ -17,9 +17,9 @@ public class MainMenu {
 	RemoveMemberView remv = new RemoveMemberView();
 	
 	public void printMainMenu() {	
+		int c = 0;
+		Scanner m_scan = new Scanner(System.in);
 		while(true) {
-			int c = 0;
-			Scanner m_scan = new Scanner(System.in);
 			System.out.println("==== WELCOME TO THE YACHT CLUB ====");
 			System.out.println("1. Register a Member");
 			System.out.println("2. Remove a Member");
@@ -53,7 +53,6 @@ public class MainMenu {
 				rebv.printRemoveBoatView();
 			} else if (c == 8) {
 				System.out.println("Exiting... Good Bye!");
-				m_scan.close();
 				System.exit(0);
 			} else if (c != 0) {
 				System.err.println("ERROR: Invalid choice... try again");

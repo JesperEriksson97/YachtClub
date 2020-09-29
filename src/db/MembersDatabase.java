@@ -173,11 +173,25 @@ public class MembersDatabase {
 	public boolean saveDatabase() {
 		try {
 			xmlp.writeToXMLFile(db, totalMembers);
-			return true;
+			return reloadDatabase(); 
 		} catch (ParserConfigurationException | TransformerException e) {
 			System.err.println(e.toString());
 			return false;
 		}
+	}
+	
+	/**
+	 * Reloads the database. Returns true if successful or false if not.
+	 * @return boolean
+	 */
+	private boolean reloadDatabase() {
+			try {
+				this.db = xmlp.readFromXMLFile();
+				return true;
+			} catch (SAXException | IOException | ParserConfigurationException e) {
+				System.err.println(e.toString());
+				return false;
+			}
 	}
 	
 	/**

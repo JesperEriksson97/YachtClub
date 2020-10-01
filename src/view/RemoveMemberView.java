@@ -8,7 +8,7 @@ import controller.MemberController;
 
 public class RemoveMemberView {
 
-	MemberController mc = new MemberController();
+	private MemberController mc = new MemberController();
 	
 	public void printRemoveMemberView() {
 		Scanner scan = new Scanner(System.in);

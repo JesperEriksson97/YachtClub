@@ -15,7 +15,7 @@ import model.Member;
 */
 public class MemberController {
 	
-	MembersDatabase mb = new MembersDatabase(); // By following MVC this could easily be 
+	private MembersDatabase mb = new MembersDatabase(); // By following MVC this could easily be 
 
 	public void addMember(String name, String personalNumber) {
 		mb.addMember(new Member(name, personalNumber));

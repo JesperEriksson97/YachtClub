@@ -8,8 +8,9 @@ import controller.MemberController;
 
 public class ListMemberView {
 
+	MemberController mc = new MemberController();
+	
 	public void printOptions() {
-		MemberController mc = new MemberController();
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("==== Choose list format ====");
@@ -25,7 +26,7 @@ public class ListMemberView {
 		}
 		
 		if(choice == 1) {
-			printVerboseList(mc.getVerboseArray());
+			printVerboseList(mc .getVerboseArray());
 		} else if (choice == 2) {
 			printCompactList(mc.getCompactArray());
 		} else {

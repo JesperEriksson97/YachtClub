@@ -7,7 +7,7 @@ import controller.MemberController;
 
 public class RegisterMemberView {
 
-	MemberController mc = new MemberController();
+	private MemberController mc = new MemberController();
 	
 	/**
 	 * Prints a form that lets a user register a member.

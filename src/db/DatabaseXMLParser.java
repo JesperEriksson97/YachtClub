@@ -138,7 +138,7 @@ public class DatabaseXMLParser {
 				
 				if(el.getElementsByTagName("OwnedBoat").getLength() != 0) {
 					for(int j = 0; j < el.getElementsByTagName("OwnedBoat").getLength(); j++) {
-						Boat b = new Boat();
+						Boat b = new Boat(); // Here is the dependency to Boat
 						b.setLength(el.getElementsByTagName("Length").item(j).getTextContent());
 						b.setName(el.getElementsByTagName("BoatName").item(j).getTextContent());
 						b.setType(el.getElementsByTagName("Type").item(j).getTextContent());

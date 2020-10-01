@@ -13,8 +13,8 @@ import org.xml.sax.SAXException;
 import model.Member;
 
 public class MembersDatabase {
-	DatabaseXMLParser xmlp = new DatabaseXMLParser();
-	int totalMembers;
+	private DatabaseXMLParser xmlp = new DatabaseXMLParser();
+	private int totalMembers;
 	private HashSet<Member> db;
 	
 	/**
@@ -159,7 +159,7 @@ public class MembersDatabase {
 	public void removeBoatOfMember(int memberId, int boatNr) {
 		Member m = this.getMemberById(memberId);
 		if(m != null) {
-			m.removeBoat(m.getOwnedBoats().get(boatNr));
+			m.removeBoat(m.getOwnedBoats().get(boatNr)); // Is this a dependency to Boat? Or just to the members array.
 		} else {
 			System.err.println("ERROR: No member with that id...");
 		}

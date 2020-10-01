@@ -7,7 +7,7 @@ import java.util.Scanner;
 import controller.MemberController;
 
 public class EditMemberView {
-	MemberController mc = new MemberController();	
+	private MemberController mc = new MemberController();	
 	public void printEditMemberView() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("==== Edit Member ====");

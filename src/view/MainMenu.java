@@ -35,6 +35,7 @@ public class MainMenu {
 				c = m_scan.nextInt();
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid choice... try again");
+				this.printMainMenu(); // Fixes the bug where enter "e" for example sets the System in to an infinite loop.
 			}
 
 			if(c == 1) {

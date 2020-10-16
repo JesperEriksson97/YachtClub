@@ -64,33 +64,6 @@ public class Member {
 		boatToEdit.setName(name);
 	}
 	
-	/**
-	 * toString function.
-	 * @return String
-	 */
-	public ArrayList<String> getStringOfOwnedBoats() {
-		
-		ArrayList<String> res = new ArrayList<String>();
-		if (this.ownedBoats.size() != 0) {
-			for (int i = 0; i < this.ownedBoats.size(); i++) {
-				res.add(this.ownedBoats.get(i).toString());
-			}
-			
-			return res;
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * toString() method, return a String representation of the Member object.
-	 * @return String
-	 */
-	/*
-	public String toString() {
-		return "ID: " + getId() + ", Name: " + getName() + ", PRNR: " + getPersonalNumber();
-	}*/
-	
 	// --- Getters and Setters ---
 	
 	public int getId() {

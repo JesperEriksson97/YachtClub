@@ -30,16 +30,6 @@ public class Boat {
 		
 	}
 	
-	/**
-	 * toString method that return a String represenatation of an Boat object.
-	 * @return String
-	 */
-	/*
-	public String toString() {
-		return this.type + ", " + this.name + ", " + this.length + " meters";
-		
-	}*/
-	
 	// --- Getters and Setters ---
 
 	public String getType() {

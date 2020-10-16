@@ -27,3 +27,14 @@ to get up to date. So for example if you remove a Member and then go to in to Vi
 will not appear. I think it has something to do with the MemberDatabase variable db not updating or that DatabaseXMLParser isn't constantly writing a new file which doesn't make the
 MemberDatbase to update and re-read the file. However, these kinds of faults doesn't seem very relevant for this assignment so I chose to not prioritize fixing it.
 The Persistance requirement is still met in my opinion, it's just the printing which is slacking a bit.
+
+==== Instructions ====
+
+This system is compiled with JDK 13.0.1.
+To run it make follow the steps below.
+
+1. Make sure that you have JDK >=13.0.1 installed on your computer. Check this by opening a command prompt and write "java -version".
+2. Enter the folder that you saved the .jar file to.
+3. Enter the command "java -jar YachtClubJar.jar"
+4. The system should be up and running.
+

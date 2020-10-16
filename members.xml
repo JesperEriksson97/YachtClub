@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><root><Member Id="4"><Name>BjornEriksson</Name><PersonalNumber>1234657890</PersonalNumber><Boats><OwnedBoat><Length>12</Length><Type>yacht</Type><BoatName>test</BoatName></OwnedBoat></Boats></Member><size>4</size></root>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><root><Member Id="5"><Name>Jesper</Name><PersonalNumber>1234567890</PersonalNumber><Boats><OwnedBoat><Length>hej</Length><Type>sail</Type><BoatName>hej</BoatName></OwnedBoat></Boats></Member><size>5</size></root>

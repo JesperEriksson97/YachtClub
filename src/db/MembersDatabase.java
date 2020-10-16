@@ -12,6 +12,12 @@ import org.xml.sax.SAXException;
 
 import model.Member;
 
+/**
+ * Responsible for CRUD (Create Read Update Delete) functionality for Members.
+ * @author Jesper Eriksson
+ *
+ */
+
 public class MembersDatabase {
 	private DatabaseXMLParser xmlp = new DatabaseXMLParser();
 	private int totalMembers;
@@ -23,6 +29,7 @@ public class MembersDatabase {
 	 * @throws IOException 
 	 * @throws SAXException 
 	 */
+	
 	public MembersDatabase() {
 		try {
 			db = xmlp.readFromXMLFile();
@@ -41,8 +48,8 @@ public class MembersDatabase {
 	 * Adds a Member to the members HashSet.
 	 * @param m A Member to be added.
 	 */
+	
 	public boolean addMember(Member member) {
-		// TODO Maybe refactor this part into a separate function.
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
 			if (m.getPersonalNumber().contentEquals(member.getPersonalNumber())) {
@@ -63,6 +70,7 @@ public class MembersDatabase {
 	 * Gets a member by id
 	 * @param id
 	 */
+	
 	public Member getMemberById(int id) {
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
@@ -78,9 +86,10 @@ public class MembersDatabase {
 	 * @param oldMember The member to be changed.
 	 * @param changedMember The member which values should be inserted.
 	 */
+	
 	public void editMember(Member oldMember, Member changedMember) {
 		try {
-			oldMember = getMemberById(oldMember.getId()); // TODO This line might unnecessary.
+			oldMember = getMemberById(oldMember.getId()); // TODO This line might be unnecessary.
 			
 			oldMember.setName(changedMember.getName());
 			boolean isRegistered = false;
@@ -107,14 +116,16 @@ public class MembersDatabase {
 	 * Deletes a member.
 	 * @param member
 	 */
-	public void deleteMemberById(int id) {
+	
+	public void deleteMember(Member m) {
 		
-		if(getMemberById(id) != null) {
-			db.remove(getMemberById(id));
+		if(m != null) {
+			db.remove(m);
 			this.saveDatabase();
 		} else {
 			System.err.println("ERROR: Couldn't find a member with that ID");
 		}
+		this.saveDatabase();
 		
 	}
 	
@@ -125,13 +136,15 @@ public class MembersDatabase {
 	 * @param length
 	 * @param name
 	 */
-	public void addBoatToMember(int id, String type, String length, String name) {
-		if(this.getMemberById(id) != null) {
-			this.getMemberById(id).addBoat(type, length, name);
+	
+	public void addBoatToMember(Member m, String type, String length, String name) {
+		if(m != null) {
+			m.addBoat(type, length, name);
 			this.saveDatabase();
 		} else {
 			System.err.println("ERROR: No member with that id...");
 		}
+		this.saveDatabase();
 	}
 	
 	/**
@@ -142,13 +155,15 @@ public class MembersDatabase {
 	 * @param length
 	 * @param name
 	 */
-	public void editBoatOfMember(int memberId, int boatNr, String type, String length, String name) {
-		if(this.getMemberById(memberId) != null) {
-			this.getMemberById(memberId).editBoat(boatNr, type, length, name);
+	
+	public void editBoatOfMember(Member m, int boatNr, String type, String length, String name) {
+		if(m != null) {
+			m.editBoat(boatNr, type, length, name);
 			this.saveDatabase();
 		} else {
 			System.err.println("ERROR: No member with that id...");
 		}
+		this.saveDatabase();
 	}
 	
 	/**
@@ -156,10 +171,9 @@ public class MembersDatabase {
 	 * @param boatNr 
 	 * @param memberId 
 	 */
-	public void removeBoatOfMember(int memberId, int boatNr) {
-		Member m = this.getMemberById(memberId);
+	public void removeBoatOfMember(Member m, int boatNr) {
 		if(m != null) {
-			m.removeBoat(m.getOwnedBoats().get(boatNr)); // Is this a dependency to Boat? Or just to the members array.
+			m.removeBoat(m.getOwnedBoats().get(boatNr));
 		} else {
 			System.err.println("ERROR: No member with that id...");
 		}
@@ -206,37 +220,17 @@ public class MembersDatabase {
 	 * Returns a ArrayList<String> representation of the database in a verbose format.
 	 * @return ArrayList<String>
 	 */
-	public ArrayList<String> getVerboseList() {
+	
+	public ArrayList<Member> getAllMembers() {
 		
-		ArrayList<String> returnArr = new ArrayList<String>();
+		ArrayList<Member> returnArr = new ArrayList<Member>();
 		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
 			Member m = it.next();
-			if(m.getStringOfOwnedBoats() != null) {
-				String toAdd = m.toString() + " Owned boats: "+ m.getStringOfOwnedBoats();
-				returnArr.add(toAdd);
-			} else {
-				String toAdd = m.toString() + ", 0 Boats Owned.";
-				returnArr.add(toAdd);
-			}
+			returnArr.add(m);
+			
 		}
-		
+		 
 		return returnArr;
 	}
 
-	/**
-	 * Returns a ArrayList<String> representation of the database in a compact format.
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getCompactList() {
-		ArrayList<String> returnArr = new ArrayList<String>();
-		for (Iterator<Member> it = db.iterator(); it.hasNext(); ) {
-			Member m = it.next();
-	
-			String toAdd = m.toString() + ", " + m.getOwnedBoats().size() + " Boats Owned.";
-			returnArr.add(toAdd);
-		}
-		
-		return returnArr;
-	}
-	
 }

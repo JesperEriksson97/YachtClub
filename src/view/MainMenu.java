@@ -7,6 +7,12 @@ import view.boatView.EditBoatView;
 import view.boatView.RegisterBoatView;
 import view.boatView.RemoveBoatView;
 
+/**
+ * Main menu view.
+ * @author Jesper Eriksson
+ *
+ */
+
 public class MainMenu {
 	RemoveBoatView rebv = new RemoveBoatView();
 	EditBoatView ebv = new EditBoatView();
@@ -15,6 +21,13 @@ public class MainMenu {
 	RegisterMemberView rmv = new RegisterMemberView();
 	ListMemberView lmv = new ListMemberView();
 	RemoveMemberView remv = new RemoveMemberView();
+	
+	public MainMenu() {
+		
+	}
+	/**
+	 * Prints main menu
+	 */
 	
 	public void printMainMenu() {	
 		int c = 0;
@@ -39,28 +52,27 @@ public class MainMenu {
 			}
 
 			if(c == 1) {
-				rmv.printRegisterMemberView();
+				rmv.print();
 			} else if (c == 2) {
-				remv.printRemoveMemberView();
+				remv.print();
 			} else if (c == 3) {
-				emv.printEditMemberView();
+				emv.print();
 			} else if (c == 4) {
-				lmv.printOptions();
+				lmv.print();
 			} else if (c == 5) {
-				rbv.printRegisterBoatView();
+				rbv.print();
 			} else if (c == 6) {
-				ebv.printEditBoatView();
+				ebv.print();
 			} else if (c == 7) {
-				rebv.printRemoveBoatView();
+				rebv.print();
 			} else if (c == 8) {
 				System.out.println("Exiting... Good Bye!");
 				System.exit(0);
 			} else if (c != 0) {
 				System.err.println("ERROR: Invalid choice... try again");
+				this.printMainMenu();
 			}
-			
-			// scan.close();
+
 		}
 	}
-
 }

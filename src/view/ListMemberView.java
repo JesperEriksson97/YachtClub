@@ -6,11 +6,19 @@ import java.util.Scanner;
 
 import controller.MemberController;
 
-public class ListMemberView {
+/**
+ * List member view
+ * @author Jesper Eriksson
+ *
+ */
 
-	MemberController mc = new MemberController();
+public class ListMemberView extends View {
+
+	/**
+	 * Print function.
+	 */
 	
-	public void printOptions() {
+	public void print() {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("==== Choose list format ====");
@@ -22,28 +30,16 @@ public class ListMemberView {
 			choice = scan.nextInt();
 		} catch (InputMismatchException e) {
 			System.err.println("Invalid choice... try again");
-			printOptions();
+			super.exit();
 		}
 		
 		if(choice == 1) {
-			printVerboseList(mc .getVerboseArray());
+			super.printVerboseListOfMembers(mc.getMemberArray());
 		} else if (choice == 2) {
-			printCompactList(mc.getCompactArray());
+			super.printCompactListOfMembers(mc.getMemberArray());
 		} else {
-			System.err.println("Invalid choice... try again");
-			printOptions();
-		}
-	}
-	
-	private void printVerboseList(ArrayList<String> arr) {
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i));
-		}
-	}
-	
-	private void printCompactList(ArrayList<String> arr) {
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i));
+			System.err.println("Invalid choice... exiting");
+			super.exit();
 		}
 	}
 	

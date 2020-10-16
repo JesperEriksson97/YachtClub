@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Representation of a Member.
+ * @author Jesper Eriksson
+ */
+
 public class Member {
 	private int id;
 	private String name;
@@ -81,9 +86,10 @@ public class Member {
 	 * toString() method, return a String representation of the Member object.
 	 * @return String
 	 */
+	/*
 	public String toString() {
 		return "ID: " + getId() + ", Name: " + getName() + ", PRNR: " + getPersonalNumber();
-	}
+	}*/
 	
 	// --- Getters and Setters ---
 	

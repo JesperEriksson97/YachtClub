@@ -1,58 +1,56 @@
 package view.boatView;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controller.MemberController;
+import view.View;
 
-public class RemoveBoatView {
+/**
+ * Remove boat view.
+ * @author Jesper Eriksson
+ */
+
+public class RemoveBoatView extends View {
+
+	/**
+	 * Print function.
+	 */
 	
-	MemberController mc = new MemberController();
-
-	public void printRemoveBoatView() {
+	public void print() {
 		System.out.println("==== Remove Boat ====");
 		int id = 0;
 		int boatNr = 0;
 		Scanner scan = new Scanner(System.in);
-		printCompactList(mc.getCompactArray());
+		
+		super.printCompactListOfMembers(mc.getMemberArray());
 		System.out.println("Enter the ID of the owner which boat you want to edit: ");
 		try {
 			id = scan.nextInt();
-		} catch (InputMismatchException e) {
-			System.err.println("ERROR: Invalid choice... try again");
-			this.printRemoveBoatView();
-		}
-		
-		if(mc.getListOfOwnedBoats(id) != null) {
-			printListOfBoatsAvailable(mc.getListOfOwnedBoats(id));
-			System.out.println("Enter the list number of the boat you want to delete: ");
-			try {
-				boatNr = scan.nextInt();
-			} catch (InputMismatchException e) {
-				System.err.println("ERROR: Invalid choice... try again");
-				this.printRemoveBoatView();
-			}
 			
-			mc.removeBoatFromMember(id, boatNr);
-		} else {
-			System.err.println("ERROR: The ID of the member entered owns no boats.");
-			this.printRemoveBoatView();
+			if(mc.getMemberById(id) == null) {
+				System.err.println("ERROR: The Member entered does not exist... exiting");
+				super.exit();
+			} else if(mc.getAmountOfBoatsOfMember(id) != 0) {
+				super.printListOfMembersOwnedBoats(mc.getMemberById(id));
+				System.out.println("Enter the list number of the boat you want to delete: ");
+				try {
+					boatNr = scan.nextInt();
+				} catch (InputMismatchException e) {
+					System.err.println("ERROR: Invalid choice... exiting");
+					super.exit();
+				}
+				
+				mc.removeBoatFromMember(id, boatNr);
+			} else {
+				System.err.println("ERROR: The ID of the member entered owns no boats.");
+				super.exit();
+			}
+		} catch (InputMismatchException e) {
+			System.err.println("ERROR: Invalid choice... exiting");
+			super.exit();
 		}
+		
 		
 	}
 	
-	private void printListOfBoatsAvailable(ArrayList<String> arr) {
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(i + ". " + arr.get(i));
-		}
-		
-	}
-	
-	private void printCompactList(ArrayList<String> arr) {
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i));
-		}
-	}
-
 }

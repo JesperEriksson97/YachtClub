@@ -1,19 +1,26 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controller.MemberController;
 
-public class RemoveMemberView {
+/**
+ * Remove member view.
+ * @author Jesper Eriksson
+ */
 
-	private MemberController mc = new MemberController();
+public class RemoveMemberView extends View{
 	
-	public void printRemoveMemberView() {
+	/**
+	 * Print function.
+	 */
+	
+	public void print() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("==== Remove A Member ====");
-		this.printCompactList(mc.getCompactArray());
+		
+		super.printCompactListOfMembers(mc.getMemberArray());
+		// this.printCompactList(mc.getCompactArray());
 		System.out.println("Choose the ID of the member you want to delete: ");
 		
 		try {
@@ -21,17 +28,7 @@ public class RemoveMemberView {
 			mc.deleteMember(id);
 		} catch(InputMismatchException e) {
 			System.err.println("ERROR: Invalid user input... try again");
-			printRemoveMemberView();
-		}
-		
-		
-	}
-	
-	// TODO Refactor this function into a helper function, used in multiple views.
-	private void printCompactList(ArrayList<String> arr) {
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i));
+			this.print();
 		}
 	}
-
 }

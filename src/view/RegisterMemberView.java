@@ -5,15 +5,18 @@ import java.util.Scanner;
 import controller.MemberController;
 
 
-public class RegisterMemberView {
-
-	private MemberController mc = new MemberController();
+/**
+ * Register Member view.
+ * @author Jesper Eriksson
+ *
+ */
+public class RegisterMemberView extends View{
 	
 	/**
 	 * Prints a form that lets a user register a member.
-	 * 
 	 */
-	public void printRegisterMemberView() {
+	
+	public void print() {
 		
 		Scanner scan = new Scanner(System.in);
 		String name;
@@ -25,28 +28,27 @@ public class RegisterMemberView {
 		System.out.println("Full Name: ");
 		name = scan.nextLine();
 		
-		if(name.matches("[a-zA-Z]+")) {
+		if(name.matches("^[\\p{L} .'-]+$")) {
 		
 			System.out.println("Personal number[YYMMDDXXXX]: ");
 			personalNumber = scan.nextLine();
 			
 			if(personalNumber.length() != 10) {
-				System.err.println("ERROR: Enter a 10 digit personalnumber in the [YYMMDDXXXX] format.");
-				this.printRegisterMemberView();
+				System.err.println("ERROR: Enter a 10 digit personalnumber in the [YYMMDDXXXX] format... exiting");
+				super.exit();
 			} else {
 				try {
 					Long.parseLong(personalNumber);
 					mc.addMember(name, personalNumber);
-					// scan.close();
 				} catch(NumberFormatException ex) {
-					System.err.println("ERROR: Enter a 10 digit personalnumber in the [YYMMDDXXXX] format.");
-					this.printRegisterMemberView();
+					System.err.println("ERROR: Enter a 10 digit personalnumber in the [YYMMDDXXXX] format... exiting");
+					super.exit();
 				}
 			}
 		
 		} else {
-			System.err.println("ERROR: A name can only contains letters.");
-			this.printRegisterMemberView();
+			System.err.println("ERROR: A name can only contains letters... exiting");
+			super.exit();
 		}
 		
 	}

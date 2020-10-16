@@ -26,18 +26,24 @@ import org.xml.sax.SAXException;
 import model.Boat;
 import model.Member;
 
+/**
+ * Responsible for writing and reading data concerning Members to a .xml file.
+ * @author Jesper Eriksson
+ *
+ */
 public class DatabaseXMLParser {
 	
 
 	/** 
 	 * Takes a HashSet of any types and writes it to a xml file.
-	 * 
+	 *  
 	 * @param members
 	 * @param size
 	 * @throws ParserConfigurationException 
 	 * @throws TransformerException 
 	 */
 	public void writeToXMLFile(HashSet<Member> members, int totalSizeOfMembers) throws ParserConfigurationException, TransformerException {
+		System.out.println("Write to database....");
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document doc = db.newDocument();
@@ -69,7 +75,6 @@ public class DatabaseXMLParser {
 			
 			
 			for(Boat b : m.getOwnedBoats()) {
-				System.out.println(b);
 				Element ownedBoat = doc.createElement("OwnedBoat");
 				
 				Element length = doc.createElement("Length");
@@ -105,7 +110,7 @@ public class DatabaseXMLParser {
 		StreamResult sr = new StreamResult(new File("members.xml"));
 		transformer.transform(source, sr);
 		
-		System.out.println("Write to database.... Done");
+		System.out.println("Done");
 	}
 	
 	/**
@@ -115,6 +120,7 @@ public class DatabaseXMLParser {
 	 * @throws IOException
 	 * @throws ParserConfigurationException
 	 */
+	
 	public HashSet<Member> readFromXMLFile() throws SAXException, IOException, ParserConfigurationException {
 		File xmlFile = new File("members.xml");
 		HashSet<Member> returnArr = new HashSet<Member>();
@@ -165,6 +171,7 @@ public class DatabaseXMLParser {
 	 * @throws IOException
 	 * @throws ParserConfigurationException
 	 */
+	
 	public int getTotalAmountOfMembersRegistered() throws SAXException, IOException, ParserConfigurationException {
 		File xmlFile = new File("members.xml");
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
